@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+  nats:
+    driver: bridge
+
+services:
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+      - "6222:6222"
+      - "8222:8222"
+    networks:
+      - nats
+    volumes:
+      - ./nats.conf:/etc/nats/nats.conf
+
+  nats2:
+    image: nats:latest
+    networks:
+      - nats
+    volumes:
+      - ./nats.conf:/etc/nats/nats.conf
+
+  nats3:
+    image: nats:latest
+    networks:
+      - nats
+    volumes:
+      - ./nats.conf:/etc/nats/nats.conf
